@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Aptos, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="AI flow design for data files and BRD documents: upload, routing, agentic profiling and mapping lane, BRD extraction lane with quality judges">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#006E74"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9E9E9E"/>
+    </marker>
+    <style>
+      .box { fill: #FFFFFF; stroke: #E0E0E0; stroke-width: 1.5; }
+      .box-top { fill: #0097AC; }
+      .box-title { font-size: 19px; font-weight: 700; fill: #212121; }
+      .box-sub { font-size: 14px; fill: #4A4A4A; }
+      .hitl { font-size: 13px; font-weight: 700; fill: #006E74; }
+      .bar { fill: #FFFFFF; stroke: #E0E0E0; stroke-width: 1.5; }
+      .bar-title { font-size: 15px; font-weight: 700; fill: #212121; }
+      .bar-sub { font-size: 14px; fill: #4A4A4A; }
+      .lane { fill: #F5F5F5; }
+      .lane-top { fill: #0097AC; }
+      .eyebrow { font-size: 15px; font-weight: 700; fill: #0097AC; letter-spacing: 2px; }
+      .title { font-size: 44px; font-weight: 700; fill: #212121; }
+      .subtitle { font-size: 20px; fill: #4A4A4A; }
+      .edge { stroke: #006E74; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .edge-dash { stroke: #9E9E9E; stroke-width: 2; fill: none; stroke-dasharray: 7 6; marker-end: url(#arrow-dash); }
+      .edge-label { font-size: 14px; font-weight: 700; fill: #006E74; }
+      .legend { font-size: 15px; fill: #4A4A4A; }
+      .legend-b { font-size: 16px; font-weight: 700; fill: #212121; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- Header -->
+  <text x="80" y="84" class="eyebrow">AI FLOW DESIGN &#183; SOURCE-TO-TARGET MAPPING</text>
+  <text x="80" y="136" class="title">Data files &amp; BRD documents &#8212; agentic profiling, mapping and extraction</text>
+  <rect x="80" y="156" width="64" height="4" fill="#0097AC"/>
+  <text x="80" y="196" class="subtitle">LLM agents propose at every layer; deterministic tools and KPI arithmetic verify; an analyst approves before anything moves forward.</text>
+
+  <!-- Entry: Upload -->
+  <g>
+    <rect x="80" y="520" width="200" height="110" class="box"/>
+    <rect x="80" y="520" width="200" height="4" class="box-top"/>
+    <text x="100" y="564" class="box-title">Upload</text>
+    <text x="100" y="588" class="box-sub">.csv &#183; .xlsx &#183; .txt data</text>
+    <text x="100" y="608" class="box-sub">.pdf &#183; .docx documents</text>
+  </g>
+  <path d="M 280 575 L 350 575" class="edge"/>
+
+  <!-- Route by input -->
+  <g>
+    <rect x="352" y="520" width="200" height="110" class="box"/>
+    <rect x="352" y="520" width="200" height="4" class="box-top"/>
+    <text x="372" y="564" class="box-title">Route by input</text>
+    <text x="372" y="588" class="box-sub">data files &#8594; profiling</text>
+    <text x="372" y="608" class="box-sub">BRD documents &#8594; extract</text>
+  </g>
+
+  <!-- Legend (left column) -->
+  <g>
+    <rect x="80" y="700" width="28" height="22" class="box"/>
+    <rect x="80" y="700" width="28" height="4" class="box-top"/>
+    <text x="120" y="717" class="legend-b">LLM agent step</text>
+    <text x="80" y="746" class="legend">Gemini, OpenAI or Groq via Google ADK.</text>
+
+    <rect x="80" y="776" width="28" height="22" class="box"/>
+    <text x="120" y="793" class="legend-b">Deterministic step</text>
+    <text x="80" y="822" class="legend">Tool, rule engine or stored artifact.</text>
+
+    <text x="80" y="866" class="hitl" font-size="16">HITL</text>
+    <text x="130" y="866" class="legend-b">Human checkpoint</text>
+    <text x="80" y="895" class="legend">Analyst approves, edits or rejects</text>
+    <text x="80" y="917" class="legend">before the next layer can run.</text>
+  </g>
+
+  <!-- ================= Data files lane ================= -->
+  <rect x="600" y="236" width="1270" height="290" class="lane"/>
+  <rect x="600" y="236" width="1270" height="3" class="lane-top"/>
+  <text x="620" y="268" class="eyebrow">DATA FILES &#183; PROFILE, DICTIONARY, METADATA, MATCH, MAP</text>
+
+  <!-- Orchestrator bar -->
+  <g>
+    <rect x="620" y="286" width="1230" height="38" class="bar"/>
+    <rect x="620" y="286" width="1230" height="4" class="box-top"/>
+    <text x="634" y="312" class="bar-title">Orchestrator agent</text>
+    <text x="796" y="312" class="bar-sub">reads the request and session memory, selects one workflow, delegates to a sub-agent, never recomputes an artifact that already exists</text>
+  </g>
+
+  <!-- D1 Profile -->
+  <g>
+    <rect x="620" y="340" width="190" height="100" class="box"/>
+    <rect x="620" y="340" width="190" height="4" class="box-top"/>
+    <text x="634" y="370" class="box-title">Profile</text>
+    <text x="634" y="394" class="box-sub">stats &amp; relationships</text>
+    <text x="634" y="412" class="box-sub">anomaly detection</text>
+    <text x="634" y="430" class="hitl">HITL &#183; chat refinement</text>
+  </g>
+  <path d="M 810 390 L 826 390" class="edge"/>
+
+  <!-- D2 Data dictionary -->
+  <g>
+    <rect x="828" y="340" width="190" height="100" class="box"/>
+    <rect x="828" y="340" width="190" height="4" class="box-top"/>
+    <text x="842" y="370" class="box-title">Data dictionary</text>
+    <text x="842" y="394" class="box-sub">generate or validate DD</text>
+    <text x="842" y="412" class="box-sub">retrieve &#8594; generate &#8594; save</text>
+    <text x="842" y="430" class="hitl">HITL &#183; edit &amp; finalize</text>
+  </g>
+  <path d="M 1018 390 L 1034 390" class="edge"/>
+
+  <!-- D3 Metadata fill -->
+  <g>
+    <rect x="1036" y="340" width="190" height="100" class="box"/>
+    <rect x="1036" y="340" width="190" height="4" class="box-top"/>
+    <text x="1050" y="370" class="box-title">Metadata fill</text>
+    <text x="1050" y="394" class="box-sub">filespecs &amp; columns</text>
+    <text x="1050" y="412" class="box-sub">template &#8594; generation</text>
+    <text x="1050" y="430" class="hitl">HITL &#183; update via chat</text>
+  </g>
+  <path d="M 1226 390 L 1242 390" class="edge"/>
+
+  <!-- D4 DART match -->
+  <g>
+    <rect x="1244" y="340" width="190" height="100" class="box"/>
+    <rect x="1244" y="340" width="190" height="4" class="box-top"/>
+    <text x="1258" y="370" class="box-title">DART match</text>
+    <text x="1258" y="394" class="box-sub">embeddings + semantics</text>
+    <text x="1258" y="412" class="box-sub">two-phase overlap check</text>
+    <text x="1258" y="430" class="box-sub">suggests target tables</text>
+  </g>
+  <path d="M 1434 390 L 1450 390" class="edge"/>
+
+  <!-- D5 Mapping -->
+  <g>
+    <rect x="1452" y="340" width="190" height="100" class="box"/>
+    <rect x="1452" y="340" width="190" height="4" class="box-top"/>
+    <text x="1466" y="370" class="box-title">Mapping</text>
+    <text x="1466" y="394" class="box-sub">agent &#8594; STTM rows</text>
+    <text x="1466" y="412" class="box-sub">source &#8594; target + logic</text>
+    <text x="1466" y="430" class="hitl">HITL &#183; review &amp; edit</text>
+  </g>
+  <path d="M 1642 390 L 1658 390" class="edge"/>
+
+  <!-- D6 Mappings library -->
+  <g>
+    <rect x="1660" y="340" width="190" height="100" class="box"/>
+    <text x="1674" y="370" class="box-title">Mappings library</text>
+    <text x="1674" y="394" class="box-sub">saved mapping packages</text>
+    <text x="1674" y="412" class="box-sub">reusable across sessions</text>
+    <text x="1674" y="430" class="box-sub">metadata Excel export</text>
+  </g>
+
+  <!-- Session memory bar -->
+  <g>
+    <rect x="620" y="458" width="1230" height="38" class="bar"/>
+    <text x="634" y="484" class="bar-title">Session memory</text>
+    <text x="776" y="484" class="bar-sub">profiling, relationship, dictionary, metadata and mapping artifacts are stored once and reused by every later step</text>
+  </g>
+
+  <!-- ================= BRD lane ================= -->
+  <rect x="600" y="646" width="1270" height="300" class="lane"/>
+  <rect x="600" y="646" width="1270" height="3" class="lane-top"/>
+  <text x="620" y="678" class="eyebrow">BRD DOCUMENTS &#183; REQUIREMENTS, DRIVER, DISCOVERY, METADATA, MAPPING</text>
+
+  <!-- B1 Requirements -->
+  <g>
+    <rect x="620" y="700" width="190" height="100" class="box"/>
+    <rect x="620" y="700" width="190" height="4" class="box-top"/>
+    <text x="634" y="730" class="box-title">Requirements</text>
+    <text x="634" y="754" class="box-sub">BRD &#183; layout &#183; transcript</text>
+    <text x="634" y="772" class="box-sub">&#8594; requirement layer</text>
+    <text x="634" y="790" class="hitl">HITL &#183; accept / reject</text>
+  </g>
+  <path d="M 810 750 L 826 750" class="edge"/>
+
+  <!-- B2 Driver logic -->
+  <g>
+    <rect x="828" y="700" width="190" height="100" class="box"/>
+    <rect x="828" y="700" width="190" height="4" class="box-top"/>
+    <text x="842" y="730" class="box-title">Driver logic</text>
+    <text x="842" y="754" class="box-sub">standards &#8594; concepts</text>
+    <text x="842" y="772" class="box-sub">&#8594; SQL filters &#8594; validate</text>
+    <text x="842" y="790" class="hitl">HITL &#183; approve &#183; patch</text>
+  </g>
+  <path d="M 1018 750 L 1034 750" class="edge"/>
+
+  <!-- B3 Discovery -->
+  <g>
+    <rect x="1036" y="700" width="190" height="100" class="box"/>
+    <rect x="1036" y="700" width="190" height="4" class="box-top"/>
+    <text x="1050" y="730" class="box-title">Discovery</text>
+    <text x="1050" y="754" class="box-sub">priority engine (rules)</text>
+    <text x="1050" y="772" class="box-sub">review agent explains</text>
+    <text x="1050" y="790" class="hitl">HITL &#183; approve</text>
+  </g>
+  <path d="M 1226 750 L 1242 750" class="edge"/>
+
+  <!-- B4 Metadata -->
+  <g>
+    <rect x="1244" y="700" width="190" height="100" class="box"/>
+    <rect x="1244" y="700" width="190" height="4" class="box-top"/>
+    <text x="1258" y="730" class="box-title">Metadata</text>
+    <text x="1258" y="754" class="box-sub">extractor &#8594; normalizer</text>
+    <text x="1258" y="772" class="box-sub">filespecs &amp; file layout</text>
+    <text x="1258" y="790" class="hitl">HITL &#183; final save</text>
+  </g>
+  <path d="M 1434 750 L 1450 750" class="edge"/>
+
+  <!-- B5 Mapping -->
+  <g>
+    <rect x="1452" y="700" width="190" height="100" class="box"/>
+    <rect x="1452" y="700" width="190" height="4" class="box-top"/>
+    <text x="1466" y="730" class="box-title">Mapping</text>
+    <text x="1466" y="754" class="box-sub">mapping row agent</text>
+    <text x="1466" y="772" class="box-sub">field-level checkpoint</text>
+    <text x="1466" y="790" class="hitl">HITL &#183; approve fields</text>
+  </g>
+  <path d="M 1642 750 L 1658 750" class="edge"/>
+
+  <!-- B6 Deliver -->
+  <g>
+    <rect x="1660" y="700" width="190" height="100" class="box"/>
+    <text x="1674" y="730" class="box-title">Deliver</text>
+    <text x="1674" y="754" class="box-sub">versioned artifacts</text>
+    <text x="1674" y="772" class="box-sub">per-layer revisions</text>
+    <text x="1674" y="790" class="box-sub">KPI report per layer</text>
+  </g>
+
+  <!-- Quality judges bar -->
+  <g>
+    <rect x="620" y="832" width="1230" height="90" class="bar"/>
+    <rect x="620" y="832" width="1230" height="4" class="box-top"/>
+    <text x="634" y="862" class="bar-title">Quality judges &#183; one per layer</text>
+    <text x="634" y="886" class="bar-sub">Gemini judges each item at temperature 0: is it present, is it grounded in the BRD, does it follow the spec. The LLM never computes a score.</text>
+    <text x="634" y="906" class="bar-sub">KPIs are plain arithmetic over those judgments: completeness &#183; hallucination rate &#183; groundedness &#183; instruction adherence. Re-running gives the same numbers.</text>
+  </g>
+  <!-- judge feed lines from the layers it evaluates -->
+  <path d="M 715 800 L 715 830" class="edge-dash"/>
+  <path d="M 923 800 L 923 830" class="edge-dash"/>
+  <path d="M 1339 800 L 1339 830" class="edge-dash"/>
+  <path d="M 1547 800 L 1547 830" class="edge-dash"/>
+
+  <!-- Branch to lanes: drawn last so the arrowheads sit on top of the lanes -->
+  <path d="M 452 520 L 452 390 L 618 390" class="edge"/>
+  <text x="466" y="378" class="edge-label">data files</text>
+  <path d="M 452 630 L 452 750 L 618 750" class="edge"/>
+  <text x="466" y="738" class="edge-label">BRD documents</text>
+</svg>

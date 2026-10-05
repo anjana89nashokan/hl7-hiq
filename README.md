@@ -28,6 +28,26 @@ Upload **`.hl7`** or **`.edi`** (HIPAA X12, e.g. 270/271 eligibility) on the Upl
 
 API health: **http://127.0.0.1:8000/health**
 
+## Flow diagrams
+
+Two upload paths, documented as presentation-ready diagrams in [`docs/`](docs/) (SVG source plus 4K PNG render).
+
+### HL7 & EDI — automated decode and governed mapping
+
+Deterministic path. HL7 v2 Z-segments are scored (semantic confidence + stability) and routed by threshold; X12 837/835 are decoded from the companion guides and mapped to JSON with per-field approval. No model calls today; LLM assist is marked as planned.
+
+![HL7 & EDI flow](docs/ai-flow-hl7-edi.png)
+
+Source: [`docs/ai-flow-hl7-edi.svg`](docs/ai-flow-hl7-edi.svg)
+
+### Data files & BRD documents — agentic profiling, mapping and extraction
+
+LLM path (Gemini / OpenAI / Groq via Google ADK). Data files go through the orchestrator agent (profile → dictionary → metadata → DART match → mapping); BRD documents go through the extract pipeline (requirements → driver → discovery → metadata → mapping) with per-layer quality judges and deterministic KPIs. Every layer has a human checkpoint.
+
+![Data files & BRD flow](docs/ai-flow-sttm-extract.png)
+
+Source: [`docs/ai-flow-sttm-extract.svg`](docs/ai-flow-sttm-extract.svg)
+
 ## Docker
 
 ```bash
