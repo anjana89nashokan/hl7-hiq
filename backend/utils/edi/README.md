@@ -11,13 +11,17 @@ use canonical mapping review.
 | Guide / family | ST01 | Notes |
 | --- | --- | --- |
 | 005010X279 | 270, 271 | Eligibility (`X279-*.edi` at repo root) |
-| 005010X221 | 835 | Remittance — `edi_samples/835/*.dat` |
-| 005010X222/X223/X224 | 837 | Claims — `edi_samples/837/*.dat` |
+| 005010X221 | 835 | Remittance — example files in [api-examples `edi_files/835`](https://github.com/Healthcare-Data-Insight/api-examples/tree/release/2.15.0/edi_files/835) |
+| 005010X222/X223/X224 | 837 | Claims — example files in [api-examples `edi_files/837`](https://github.com/Healthcare-Data-Insight/api-examples/tree/release/2.15.0/edi_files/837) |
 
-Companion references: `835_compguide.pdf`, `837-health-care-claim-companion-guide 1.pdf`
+Companion references (repo copies): `docs/835_compguide.pdf`, `docs/837-health-care-claim-companion-guide.pdf`.
+**Onboarding (full flow):** [`docs/onboarding-hl7-edi.md`](../../../docs/onboarding-hl7-edi.md)
+(phase-1 requirements, UI routes, storage). This README is the EDI module cheat sheet.
 
-Sample corpus: `edi_samples/` (`.dat` and `.edi`). Fixed-width tabular `.dat` files
-are **not** X12 — use the normal upload path.
+Sample EDI files (not in this repo): use **`edi_files/837`** and **`edi_files/835`** in
+[Healthcare-Data-Insight api-examples](https://github.com/Healthcare-Data-Insight/api-examples/tree/release/2.15.0/edi_files)
+for claim and remittance decode testing.
+Fixed-width tabular `.dat` files are **not** X12 — use the normal upload path.
 
 ## API
 
