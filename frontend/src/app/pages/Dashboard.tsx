@@ -3,7 +3,6 @@ import { ActionCard } from "../components/Dashboard/ActionCard";
 import type { DashboardStats } from "../interfaces/types";
 import DashboardService from "../end-points/dashboardService";
 import { UserList } from "../components/Dashboard/UserList";
-import { getUserName } from "../utils/userIdentity";
 import { sttmNav } from "../utils/sttmRoutes";
 
 const Dashboard: React.FC = () => {
@@ -44,17 +43,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="min-h-screen bg-brand-light text-slate-900 font-sans pb-12">
       <main className="max-w-7xl mx-auto p-8">
-        <h2 className="text-2xl font-bold mb-8 text-brand-darkblue">
-          Welcome, {stats.user_name && stats.user_name !== "User" ? stats.user_name : getUserName()}
-        </h2>
-
         <section className="mb-10 bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-          <header className="flex items-center justify-between mb-6">
-            <h4 className="text-[12px] font-bold text-gray-400 uppercase">
-              Viewing personal statistics for <span className="text-brand-darkblue">{stats.user_name}</span>
-            </h4>
-          </header>
-
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <ActionCard
               title="Profiling & Mapping"

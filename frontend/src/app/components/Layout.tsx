@@ -1,6 +1,5 @@
 import { Outlet, useLocation } from "react-router-dom";
 import { useState, useEffect, type KeyboardEvent } from "react";
-import Header from "./Header";
 import Sidebar from "./Sidebar";
 import ChatSidebar from "./ChatSidebar";
 import { useChat } from "../contexts/ChatContext";
@@ -82,9 +81,6 @@ export default function Layout() {
 
   return (
     <div className="h-screen flex flex-col">
-      {/* Top Header */}
-      <Header />
-
       {/* Sidebar + Main */}
       <div className="flex flex-1 items-stretch overflow-hidden">
         {!hideSidebar && (
