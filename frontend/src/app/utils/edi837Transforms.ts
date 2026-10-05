@@ -100,21 +100,20 @@ type TemporalInput = Pick<
 
 /** Date/time fields can use Transform + format; everything else is locked to Direct. */
 export function classifyEdi837Temporal(row: TemporalInput): Edi837TemporalKind | null {
+  // 837 DTP = date/time period; mapping step treats all DTP elements as dates.
+  if (row.segment_id === "DTP") {
+    return "date";
+  }
+
   const name = row.element_name.toLowerCase();
   const mean = (row.meaning || "").toLowerCase();
   const digits = (row.value || "").trim().replace(/\D/g, "");
 
-  if (
-    mean.includes("hhmm") ||
-    name.includes("time") ||
-    row.element_id === "BHT05" ||
-    (row.segment_id === "DTP" && row.element_id === "DTP03" && mean.includes("tm"))
-  ) {
+  if (row.element_id === "BHT05" || (name.includes("time") && !name.includes("date"))) {
     return "time";
   }
-  if (row.segment_id === "DTP" && row.element_id === "DTP03") {
-    if (mean.includes("tm") || mean.includes("hhmm")) return "time";
-    return "date";
+  if (mean.includes("hhmm") && !mean.includes("ccyymmdd") && !mean.includes("d8")) {
+    return "time";
   }
   if (
     mean.includes("ccyymmdd") ||
