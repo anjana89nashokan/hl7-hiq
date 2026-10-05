@@ -35,18 +35,21 @@ const STATUS_STYLE = {
 
 const JsonMappingColGroup = () => (
   <colgroup>
-    <col style={{ width: "18%" }} />
+    <col style={{ width: "23%" }} />
     <col style={{ width: "28%" }} />
-    <col style={{ width: "14%" }} />
-    <col style={{ width: "6%" }} />
-    <col style={{ width: "6%" }} />
-    <col style={{ width: "9%" }} />
-    <col style={{ width: "13%" }} />
+    <col style={{ width: "11%" }} />
+    <col style={{ width: "10%" }} />
+    <col style={{ width: "10%" }} />
+    <col style={{ width: "8%" }} />
+    <col style={{ width: "10%" }} />
   </colgroup>
 );
 
-const compactSampleClass =
-  "text-[10px] font-mono text-[#4A4A4A] truncate block max-w-full";
+const sampleValueClass =
+  "text-xs font-mono text-[#4A4A4A] break-all leading-snug block whitespace-normal";
+
+/** Single-line cell; full value on hover via title. */
+const oneLineClass = "block min-w-0 truncate whitespace-nowrap text-xs";
 
 const EDI837JsonMapping: React.FC = () => {
   const { hl7SessionId } = useParams<{ hl7SessionId: string }>();
@@ -281,7 +284,7 @@ const EDI837JsonMapping: React.FC = () => {
               }
               onClick={() => download837Json(decoded, activeFile, exportTransforms)}
             >
-              Download JSON
+              Download Mapping
             </button>
             <button
               type="button"
@@ -388,18 +391,18 @@ const EDI837JsonMapping: React.FC = () => {
         </div>
 
         <section className={t.card}>
-          <div className={t.scrollPanel}>
-            <table className="w-full min-w-[1040px] table-fixed border-collapse text-sm">
+          <div className="overflow-x-auto overflow-y-auto border border-[#E0E0E0] bg-white max-h-[min(70vh,720px)]">
+            <table className="w-full min-w-[1280px] table-fixed border-collapse text-sm">
               <JsonMappingColGroup />
               <thead className="sticky top-0 z-10">
                 <tr className={t.tableHead}>
-                  <th className={t.th}>Source</th>
-                  <th className={t.th}>JSON target</th>
-                  <th className={t.th}>Transform</th>
-                  <th className={`${t.th} px-2`}>Ex.</th>
-                  <th className={`${t.th} px-2`}>Prev.</th>
-                  <th className={t.th}>Status</th>
-                  <th className={t.th}>Actions</th>
+                  <th className={`${t.th} whitespace-nowrap px-3 py-3`}>Source</th>
+                  <th className={`${t.th} whitespace-nowrap px-3 py-3`}>Target</th>
+                  <th className={`${t.th} whitespace-nowrap px-3 py-3`}>Transform</th>
+                  <th className={`${t.th} whitespace-nowrap px-3 py-3`}>Example</th>
+                  <th className={`${t.th} whitespace-nowrap px-3 py-3`}>Preview</th>
+                  <th className={`${t.th} whitespace-nowrap px-3 py-3`}>Status</th>
+                  <th className={`${t.th} whitespace-nowrap px-3 py-3`}>Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -423,25 +426,22 @@ const EDI837JsonMapping: React.FC = () => {
                         className={`${t.tableRow} align-middle ${temporal ? "cursor-pointer" : ""}`}
                         onClick={() => temporal && openEdit(row)}
                       >
-                        <td className={`${t.tdMiddle} overflow-hidden max-w-0`}>
-                          <code className="font-mono text-xs font-bold text-[#212121] block truncate">
+                        <td className={`${t.tdMiddle} px-3 align-top`}>
+                          <code className="font-mono text-xs font-bold text-[#212121] block break-all leading-snug">
                             {row.segment_id}-{row.element_id}
                           </code>
-                          <div
-                            className="text-[10px] text-[#0097AC] font-bold uppercase tracking-[0.08em] mt-0.5 truncate"
-                            title={row.section_title}
-                          >
+                          <div className="text-[11px] text-[#0097AC] font-bold uppercase tracking-[0.06em] mt-1 break-words leading-snug">
                             {row.section_title}
                           </div>
-                          <div
-                            className="text-[10px] text-[#4A4A4A] mt-0.5 truncate"
-                            title={row.element_name}
-                          >
+                          <div className="text-xs text-[#4A4A4A] mt-0.5 break-words leading-snug">
                             {row.element_name}
                           </div>
                         </td>
-                        <td className={t.tdMiddle}>
-                          <code className="font-mono text-sm text-[#006E74] break-all leading-snug block">
+                        <td className={`${t.tdMiddle} px-3 max-w-0 overflow-hidden`}>
+                          <code
+                            className={`${oneLineClass} font-mono text-[#006E74]`}
+                            title={row.target}
+                          >
                             {row.target}
                           </code>
                         </td>
@@ -456,16 +456,11 @@ const EDI837JsonMapping: React.FC = () => {
                             </div>
                           )}
                         </td>
-                        <td className={`${t.tdMiddle} overflow-hidden max-w-0 px-2`}>
-                          <code className={compactSampleClass} title={row.value || undefined}>
-                            {row.value || "—"}
-                          </code>
+                        <td className={`${t.tdMiddle} px-3 align-top`}>
+                          <code className={sampleValueClass}>{row.value || "—"}</code>
                         </td>
-                        <td className={`${t.tdMiddle} overflow-hidden max-w-0 px-2`}>
-                          <code
-                            className={`${compactSampleClass} text-[#212121]`}
-                            title={preview || undefined}
-                          >
+                        <td className={`${t.tdMiddle} px-3 align-top`}>
+                          <code className={`${sampleValueClass} text-[#212121]`}>
                             {preview || "—"}
                           </code>
                         </td>
