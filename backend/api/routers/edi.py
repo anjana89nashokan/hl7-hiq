@@ -18,6 +18,8 @@ from db.repositories import AppSessionRepository
 from utils.edi import (
     build_mappings,
     canonical_model,
+    decode_edi_835,
+    decode_edi_835_from_stored,
     decode_edi_837,
     decode_edi_837_from_stored,
     entities_in_play,
@@ -138,8 +140,10 @@ async def upload_edi(
         )
 
     prof = profile(messages)
-    is_837 = all(m.transaction_set == "837" for m in messages)
-    if is_837:
+    txns = {m.transaction_set for m in messages}
+    is_837 = txns == {"837"}
+    is_835 = txns == {"835"}
+    if is_837 or is_835:
         mappings = []
         mapping_summary = {
             "total": 0,
@@ -150,8 +154,12 @@ async def upload_edi(
             "low_confidence": 0,
         }
         edi_parsed = serialize_edi_messages(messages)
-        edi_decoded = decode_edi_837(messages)
-        view_mode = "837_decode"
+        if is_837:
+            edi_decoded = decode_edi_837(messages)
+            view_mode = "837_decode"
+        else:
+            edi_decoded = decode_edi_835(messages)
+            view_mode = "835_decode"
     else:
         mappings = build_mappings(messages)
         mapping_summary = summarise(mappings)
@@ -159,7 +167,7 @@ async def upload_edi(
         edi_decoded = None
         view_mode = "x12_mapping"
 
-    entities = entities_in_play(messages) if not is_837 else []
+    entities = entities_in_play(messages) if not (is_837 or is_835) else []
 
     session_id = uuid.uuid4().hex
     payload = {
@@ -246,14 +254,17 @@ async def get_edi_decoded(
         result = dict(row.result_json or {})
     if result.get("format") != "x12":
         raise HTTPException(status_code=400, detail="not an X12 EDI session")
-    if result.get("view_mode") != "837_decode":
-        raise HTTPException(status_code=400, detail="session is not an 837 decode view")
+    view_mode = result.get("view_mode")
+    if view_mode not in ("837_decode", "835_decode"):
+        raise HTTPException(status_code=400, detail="session is not a companion-guide decode view")
     decoded = result.get("edi_decoded")
     if decoded:
         return decoded
     stored = result.get("edi_parsed") or []
     if not stored:
         raise HTTPException(status_code=404, detail="no stored EDI payload for this session")
+    if view_mode == "835_decode":
+        return decode_edi_835_from_stored(stored)
     return decode_edi_837_from_stored(stored)
 
 
@@ -271,12 +282,17 @@ async def export_edi_json(
         if row.user_key and row.user_key != current_user.user_key:
             raise HTTPException(status_code=404, detail="session not found")
         result = dict(row.result_json or {})
-    if result.get("format") != "x12" or result.get("view_mode") != "837_decode":
-        raise HTTPException(status_code=400, detail="session is not an 837 decode export")
+    view_mode = result.get("view_mode")
+    if result.get("format") != "x12" or view_mode not in ("837_decode", "835_decode"):
+        raise HTTPException(status_code=400, detail="session is not a companion-guide decode export")
     decoded = result.get("edi_decoded")
     if not decoded:
         stored = result.get("edi_parsed") or []
         if not stored:
             raise HTTPException(status_code=404, detail="no stored EDI payload for this session")
-        decoded = decode_edi_837_from_stored(stored)
+        decoded = (
+            decode_edi_835_from_stored(stored)
+            if view_mode == "835_decode"
+            else decode_edi_837_from_stored(stored)
+        )
     return decoded_corpus_to_json(decoded)

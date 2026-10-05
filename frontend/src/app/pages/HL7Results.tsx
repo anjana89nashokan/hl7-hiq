@@ -482,7 +482,10 @@ const HL7Results: React.FC = () => {
       try {
         let data: HL7ResultWithEdi = bootstrap ?? (await getHL7Session(id) as HL7ResultWithEdi);
         if (cancelled) return;
-        if (data.view_mode === "837_decode" && !data.edi_decoded) {
+        if (
+          (data.view_mode === "837_decode" || data.view_mode === "835_decode") &&
+          !data.edi_decoded
+        ) {
           try {
             const decoded = await getEdiDecoded(id);
             if (!cancelled) data = { ...data, edi_decoded: decoded };
@@ -557,7 +560,8 @@ const HL7Results: React.FC = () => {
   const activeFileObj = result?.files.find((f) => f.filename === activeFile);
 
   const isEdi = result?.format === "x12";
-  const is837Decode = result?.view_mode === "837_decode";
+  const isCompanionDecode =
+    result?.view_mode === "837_decode" || result?.view_mode === "835_decode";
 
   if (loading) {
     return (
@@ -578,7 +582,7 @@ const HL7Results: React.FC = () => {
     );
   }
 
-  if (is837Decode) {
+  if (isCompanionDecode) {
     return <EDI837DecodeView key={result.hl7_session_id} result={result} />;
   }
 

@@ -1315,7 +1315,8 @@ const HL7MappingReview: React.FC = () => {
     setLoading(true);
     try {
       const session = await getHL7Session(hl7SessionId);
-      if ((session as { view_mode?: string }).view_mode === "837_decode") {
+      const vm = (session as { view_mode?: string }).view_mode;
+      if (vm === "837_decode" || vm === "835_decode") {
         navigate(sttmNav(`/hl7/${hl7SessionId}`), { replace: true });
         return;
       }

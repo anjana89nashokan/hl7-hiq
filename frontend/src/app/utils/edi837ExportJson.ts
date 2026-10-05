@@ -66,7 +66,10 @@ function segmentFields(
 
 /** Row sub-header: NM1 party role, otherwise X12 segment name. */
 export function segmentDisplayLabel(segment: EDI837DecodedSegment): string {
-  if (segment.segment_id === "NM1" && segment.segment_label?.trim()) {
+  if (
+    (segment.segment_id === "NM1" || segment.segment_id === "N1") &&
+    segment.segment_label?.trim()
+  ) {
     return segment.segment_label;
   }
   return segment.segment_name?.trim() || segment.segment_id;

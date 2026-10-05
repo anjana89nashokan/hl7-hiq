@@ -103,7 +103,8 @@ const EDI837JsonMapping: React.FC = () => {
     (async () => {
       try {
         const session = await getHL7Session(hl7SessionId);
-        if ((session as HL7ResultWithEdi).view_mode !== "837_decode") {
+        const vm = (session as HL7ResultWithEdi).view_mode;
+        if (vm !== "837_decode" && vm !== "835_decode") {
           if (!cancelled) navigate(sttmNav(`/hl7/${hl7SessionId}`), { replace: true });
           return;
         }
@@ -264,7 +265,12 @@ const EDI837JsonMapping: React.FC = () => {
       <main className={`${t.container} max-w-[1400px]`}>
         <div className="flex items-start justify-between mb-6 gap-4">
           <div>
-            <div className={t.eyebrow}>X12 837 · JSON mapping</div>
+            <div className={t.eyebrow}>
+              X12{" "}
+              {decoded.files[0]?.messages[0]?.transaction_set ??
+                (result.view_mode === "835_decode" ? "835" : "837")}{" "}
+              · JSON mapping
+            </div>
             <h2 className={t.heading}>Map to JSON</h2>
             <div className={t.accentRule} />
             <p className={t.subtext}>
