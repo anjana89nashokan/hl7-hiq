@@ -227,6 +227,10 @@ export const EDI837DecodeView: React.FC<{ result: HL7ResultWithEdi }> = ({ resul
   const navigate = useNavigate();
   const decoded = result.edi_decoded;
   const files = decoded?.files ?? [];
+  const txn =
+    files[0]?.messages[0]?.transaction_set ??
+    (result.view_mode === "835_decode" ? "835" : "837");
+  const is835 = txn === "835" || result.view_mode === "835_decode";
   const [activeFile, setActiveFile] = useState(files[0]?.filename ?? "");
   const [sectionFilter, setSectionFilter] = useState<string>("all");
   const [collapsedKeys, setCollapsedKeys] = useState<Set<string>>(() => new Set());
@@ -332,12 +336,19 @@ export const EDI837DecodeView: React.FC<{ result: HL7ResultWithEdi }> = ({ resul
       <main className={t.container}>
         <div className="flex items-start justify-between mb-8 gap-4">
           <div>
-            <div className={t.eyebrow}>X12 837 · HIPAA 005010</div>
-            <h2 className={t.heading}>Claim segment decode</h2>
+            <div className={t.eyebrow}>
+              X12 {txn} · HIPAA 005010{is835 ? "X221" : ""}
+            </div>
+            <h2 className={t.heading}>
+              {is835 ? "Remittance segment decode" : "Claim segment decode"}
+            </h2>
             <div className={t.accentRule} />
             <p className={t.subtext}>
-              Grouped by companion-guide loops (NM1 with N3/N4, HI with claim CLM, etc.). File order
-              is preserved within each section ({decoded?.guide_reference ?? "837 guide"}).
+              {is835
+                ? "Grouped by companion-guide loops (1000A/B payer & payee, 2100 claim payment, PLB, etc.)."
+                : "Grouped by companion-guide loops (NM1 with N3/N4, HI with claim CLM, etc.)."}{" "}
+              File order is preserved within each section (
+              {decoded?.guide_reference ?? `${txn} guide`}).
             </p>
           </div>
           <div className="flex flex-col gap-2 shrink-0">

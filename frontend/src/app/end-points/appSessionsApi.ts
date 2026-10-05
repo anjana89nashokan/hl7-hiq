@@ -7,7 +7,7 @@ const baseUrl = API_BASE_URL;
 export interface AppSessionHl7Summary {
   hl7_session_id: string;
   format?: "hl7" | "x12";
-  view_mode?: "837_decode" | "x12_mapping";
+  view_mode?: "837_decode" | "835_decode" | "x12_mapping";
   message_types?: Record<string, number>;
   status: string;
   messages_parsed: number;

@@ -103,7 +103,7 @@ export interface EDI837DecodePayload {
 }
 
 export type HL7ResultWithEdi = HL7Result & {
-  view_mode?: "837_decode" | "x12_mapping";
+  view_mode?: "837_decode" | "835_decode" | "x12_mapping";
   edi_decoded?: EDI837DecodePayload;
 };
 
