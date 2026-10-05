@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" font-family="Aptos, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" role="img" aria-label="Interchange flow design for HL7 and EDI: upload, format detection, HL7 scoring and review lane, EDI decode and mapping lane">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#006E74"/>
+    </marker>
+    <marker id="arrow-dash" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#9E9E9E"/>
+    </marker>
+    <style>
+      .box { fill: #FFFFFF; stroke: #E0E0E0; stroke-width: 1.5; }
+      .box-top { fill: #0097AC; }
+      .box-title { font-size: 19px; font-weight: 700; fill: #212121; }
+      .box-sub { font-size: 14px; fill: #4A4A4A; }
+      .lane { fill: #F5F5F5; }
+      .lane-top { fill: #0097AC; }
+      .eyebrow { font-size: 15px; font-weight: 700; fill: #0097AC; letter-spacing: 2px; }
+      .title { font-size: 44px; font-weight: 700; fill: #212121; }
+      .subtitle { font-size: 20px; fill: #4A4A4A; }
+      .edge { stroke: #006E74; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .edge-dash { stroke: #9E9E9E; stroke-width: 2; fill: none; stroke-dasharray: 7 6; marker-end: url(#arrow-dash); }
+      .edge-label { font-size: 14px; font-weight: 700; fill: #006E74; }
+      .route-row { font-size: 15px; fill: #4A4A4A; }
+      .route-score { font-size: 14px; font-weight: 700; fill: #006E74; font-family: Consolas, Menlo, monospace; }
+      .legend { font-size: 15px; fill: #4A4A4A; }
+      .legend-b { font-size: 16px; font-weight: 700; fill: #212121; }
+    </style>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#FFFFFF"/>
+
+  <!-- Header -->
+  <text x="80" y="84" class="eyebrow">INTERCHANGE FLOW DESIGN &#183; HEALTHCARE</text>
+  <text x="80" y="136" class="title">HL7 &amp; EDI &#8212; automated decode and governed mapping</text>
+  <rect x="80" y="156" width="64" height="4" fill="#0097AC"/>
+  <text x="80" y="196" class="subtitle">One upload path, two deterministic engines. Explainable scoring and guide-based decode do the work; humans approve every mapping; every result is reproducible and auditable.</text>
+
+  <!-- Entry: Upload -->
+  <g>
+    <rect x="80" y="520" width="200" height="110" class="box"/>
+    <rect x="80" y="520" width="200" height="4" class="box-top"/>
+    <text x="100" y="566" class="box-title">Upload</text>
+    <text x="100" y="592" class="box-sub">.hl7 &#183; .edi &#183; .dat</text>
+    <text x="100" y="612" class="box-sub">single file or batch</text>
+  </g>
+  <path d="M 280 575 L 350 575" class="edge"/>
+
+  <!-- Detect format -->
+  <g>
+    <rect x="352" y="520" width="200" height="110" class="box"/>
+    <rect x="352" y="520" width="200" height="4" class="box-top"/>
+    <text x="372" y="566" class="box-title">Detect format</text>
+    <text x="372" y="592" class="box-sub">sniff the first bytes</text>
+    <text x="372" y="612" class="box-sub">MSH vs ISA / GS / ST</text>
+  </g>
+
+
+  <!-- Legend (left column) -->
+  <g>
+    <rect x="80" y="700" width="4" height="22" fill="#0097AC"/>
+    <text x="96" y="717" class="legend-b">Built</text>
+    <text x="80" y="746" class="legend">Deterministic scoring and guide-based decode.</text>
+    <text x="80" y="768" class="legend">Reproducible, auditable, no model calls.</text>
+    <rect x="80" y="806" width="4" height="22" fill="#9E9E9E"/>
+    <text x="96" y="823" class="legend-b">Planned</text>
+    <text x="80" y="852" class="legend">LLM assist, only for fields the data itself</text>
+    <text x="80" y="874" class="legend">cannot explain. The engine always runs first.</text>
+  </g>
+
+  <!-- ================= HL7 lane ================= -->
+  <rect x="600" y="236" width="1270" height="300" class="lane"/>
+  <rect x="600" y="236" width="1270" height="3" class="lane-top"/>
+  <text x="620" y="268" class="eyebrow">HL7 V2 FLOW &#183; PROFILE, SCORE, ROUTE, REVIEW, PUBLISH</text>
+
+  <!-- H1 Parse -->
+  <g>
+    <rect x="620" y="300" width="180" height="90" class="box"/>
+    <text x="634" y="332" class="box-title">Parse</text>
+    <text x="634" y="356" class="box-sub">segments &amp; fields</text>
+    <text x="634" y="376" class="box-sub">Z-segment detection</text>
+  </g>
+  <path d="M 800 345 L 816 345" class="edge"/>
+
+  <!-- H2 Profile -->
+  <g>
+    <rect x="818" y="300" width="180" height="90" class="box"/>
+    <text x="832" y="332" class="box-title">Profile corpus</text>
+    <text x="832" y="356" class="box-sub">segment frequency</text>
+    <text x="832" y="376" class="box-sub">field population rate</text>
+  </g>
+  <path d="M 998 345 L 1014 345" class="edge"/>
+
+  <!-- H3 Score -->
+  <g>
+    <rect x="1016" y="300" width="180" height="90" class="box"/>
+    <rect x="1016" y="300" width="180" height="4" class="box-top"/>
+    <text x="1030" y="332" class="box-title">Score Z-segments</text>
+    <text x="1030" y="356" class="box-sub">semantic confidence</text>
+    <text x="1030" y="376" class="box-sub">stability &#183; rule-based</text>
+  </g>
+  <path d="M 1196 345 L 1212 345" class="edge"/>
+
+  <!-- H4 Route by score (wider so every row fits) -->
+  <g>
+    <rect x="1214" y="272" width="230" height="148" class="box"/>
+    <rect x="1214" y="272" width="230" height="4" class="box-top"/>
+    <text x="1228" y="302" class="box-title">Route by score</text>
+    <text x="1228" y="332" class="route-score">&#8805; 0.85</text>
+    <text x="1322" y="332" class="route-row">Auto-map</text>
+    <text x="1228" y="360" class="route-score">0.50&#8211;0.85</text>
+    <text x="1322" y="360" class="route-row">Review</text>
+    <text x="1228" y="388" class="route-score">&lt; 0.50</text>
+    <text x="1322" y="388" class="route-row">Human required</text>
+    <line x1="1228" y1="398" x2="1430" y2="398" stroke="#E0E0E0"/>
+    <text x="1228" y="412" class="box-sub" font-size="12">every score carries its reasons</text>
+  </g>
+  <path d="M 1444 345 L 1460 345" class="edge"/>
+
+  <!-- H5 Mapping review -->
+  <g>
+    <rect x="1462" y="300" width="180" height="90" class="box"/>
+    <text x="1476" y="332" class="box-title">Mapping review</text>
+    <text x="1476" y="356" class="box-sub">approve &#183; edit &#183; reject</text>
+    <text x="1476" y="376" class="box-sub">reason required</text>
+  </g>
+  <path d="M 1642 345 L 1658 345" class="edge"/>
+
+  <!-- H6 Publish -->
+  <g>
+    <rect x="1660" y="300" width="180" height="90" class="box"/>
+    <rect x="1660" y="300" width="180" height="4" class="box-top"/>
+    <text x="1674" y="332" class="box-title">Publish</text>
+    <text x="1674" y="356" class="box-sub">immutable version</text>
+    <text x="1674" y="376" class="box-sub">canonical JSON &#183; FHIR</text>
+  </g>
+
+  <!-- LLM assist (planned) -->
+  <g>
+    <rect x="1214" y="446" width="428" height="86" fill="#FFFFFF" stroke="#9E9E9E" stroke-width="1.5" stroke-dasharray="7 6"/>
+    <text x="1228" y="474" class="box-title" fill="#4A4A4A" font-size="17">LLM assist &#183; planned</text>
+    <text x="1228" y="497" class="box-sub">proposes a meaning for review-band fields</text>
+    <text x="1228" y="517" class="box-sub">that are not self-describing; the engine runs first</text>
+  </g>
+  <path d="M 1552 446 L 1552 393" class="edge-dash"/>
+
+  <!-- ================= EDI lane ================= -->
+  <rect x="600" y="656" width="1270" height="320" class="lane"/>
+  <rect x="600" y="656" width="1270" height="3" class="lane-top"/>
+  <text x="620" y="688" class="eyebrow">X12 EDI FLOW &#183; DECODE, MAP, APPROVE, EXPORT</text>
+
+  <!-- E1 Parse X12 -->
+  <g>
+    <rect x="620" y="720" width="180" height="90" class="box"/>
+    <text x="634" y="752" class="box-title">Parse X12</text>
+    <text x="634" y="776" class="box-sub">delimiters from ISA</text>
+    <text x="634" y="796" class="box-sub">segment &#183; element paths</text>
+  </g>
+  <path d="M 800 765 L 816 765" class="edge"/>
+
+  <!-- E2 Transaction set -->
+  <g>
+    <rect x="818" y="720" width="180" height="90" class="box"/>
+    <text x="832" y="752" class="box-title">Transaction set</text>
+    <text x="832" y="776" class="box-sub">ST01 &#183; 837 / 835</text>
+    <text x="832" y="796" class="box-sub">270 / 271</text>
+  </g>
+  <path d="M 998 765 L 1014 765" class="edge"/>
+
+  <!-- E3 Decode -->
+  <g>
+    <rect x="1016" y="720" width="180" height="90" class="box"/>
+    <rect x="1016" y="720" width="180" height="4" class="box-top"/>
+    <text x="1030" y="752" class="box-title">Guide decode</text>
+    <text x="1030" y="776" class="box-sub">companion-guide loops</text>
+    <text x="1030" y="796" class="box-sub">names &#183; code meanings</text>
+  </g>
+  <path d="M 1196 765 L 1212 765" class="edge"/>
+
+  <!-- E4 JSON mapping -->
+  <g>
+    <rect x="1214" y="720" width="230" height="90" class="box"/>
+    <rect x="1214" y="720" width="230" height="4" class="box-top"/>
+    <text x="1228" y="752" class="box-title">JSON mapping</text>
+    <text x="1228" y="776" class="box-sub">Direct, or date/time Transform</text>
+    <text x="1228" y="796" class="box-sub">format suggested per field</text>
+  </g>
+  <path d="M 1444 765 L 1460 765" class="edge"/>
+
+  <!-- E5 Approve -->
+  <g>
+    <rect x="1462" y="720" width="180" height="90" class="box"/>
+    <text x="1476" y="752" class="box-title">Approve</text>
+    <text x="1476" y="776" class="box-sub">per field or approve all</text>
+    <text x="1476" y="796" class="box-sub">pending blocks export</text>
+  </g>
+  <path d="M 1642 765 L 1658 765" class="edge"/>
+
+  <!-- E6 Download -->
+  <g>
+    <rect x="1660" y="720" width="180" height="90" class="box"/>
+    <rect x="1660" y="720" width="180" height="4" class="box-top"/>
+    <text x="1674" y="752" class="box-title">Download</text>
+    <text x="1674" y="776" class="box-sub">hierarchical JSON</text>
+    <text x="1674" y="796" class="box-sub">snake_case targets</text>
+  </g>
+
+  <!-- 270/271 branch -->
+  <path d="M 908 810 L 908 880 L 1014 880" class="edge"/>
+  <text x="920" y="868" class="edge-label">270 &#183; 271</text>
+  <g>
+    <rect x="1016" y="836" width="428" height="88" class="box"/>
+    <text x="1030" y="864" class="box-title" font-size="17">Rule-based canonical mapping</text>
+    <text x="1030" y="887" class="box-sub">eligibility fields &#8594; governed canonical model</text>
+    <text x="1030" y="907" class="box-sub">then the same review and publish steps as HL7</text>
+  </g>
+  <path d="M 1444 880 L 1552 880 L 1552 812" class="edge-dash"/>
+
+  <!-- Branch to lanes: drawn last so the arrowheads sit on top of the lanes -->
+  <path d="M 452 520 L 452 345 L 618 345" class="edge"/>
+  <text x="466" y="333" class="edge-label">HL7 v2 &#183; MSH</text>
+  <path d="M 452 630 L 452 765 L 618 765" class="edge"/>
+  <text x="466" y="753" class="edge-label">X12 EDI &#183; ISA</text>
+</svg>
