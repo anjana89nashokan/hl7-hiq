@@ -28,6 +28,10 @@ Upload **`.hl7`** or **`.edi`** (HIPAA X12, e.g. 270/271 eligibility) on the Upl
 
 API health: **http://127.0.0.1:8000/health**
 
+## Onboarding
+
+New to the HL7 / EDI side? Start with [`docs/onboarding-hl7-edi.md`](docs/onboarding-hl7-edi.md): upload detection, both pipelines step by step, which file owns each step, storage, and where to start for common tasks.
+
 ## Flow diagrams
 
 Two upload paths, documented as presentation-ready diagrams in [`docs/`](docs/) (SVG source plus 4K PNG render).

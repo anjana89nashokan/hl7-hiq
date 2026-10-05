@@ -17,6 +17,8 @@ FHIR optional.
 > the tabular table load entirely, because an HL7 message is a tree rather than
 > a row. The reviewer-facing pages are `/hl7/:id` (profile) and
 > `/hl7/:id/review` (mapping workbench).
+>
+> **Onboarding (full flow):** [`docs/onboarding-hl7-edi.md`](../../../docs/onboarding-hl7-edi.md)
 
 ## Governance rules enforced
 
