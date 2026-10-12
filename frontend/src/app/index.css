@@ -1,4 +1,13 @@
 :root {
+  /* UST brand (see ust-theme skill) */
+  --ust-dark-teal: #006e74;
+  --ust-light-teal: #0097ac;
+  --ust-soft-black: #212121;
+  --ust-white: #ffffff;
+  --ust-light-gray: #f5f5f5;
+  --ust-border-color: #e0e0e0;
+  --ust-body-text: #4a4a4a;
+
   /* UST STTM theme tokens (scoped to the embedded app shell). */
   --color-brand-blue: #0F9BAA;
   --color-brand-light: #F4F7F7;
@@ -43,7 +52,7 @@
 
 .sidebar-scroll {
   scrollbar-width: thin;
-  scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+  scrollbar-color: var(--ust-border-color) transparent;
 }
 
 .sidebar-scroll::-webkit-scrollbar {
@@ -51,8 +60,8 @@
 }
 
 .sidebar-scroll::-webkit-scrollbar-thumb {
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 4px;
+  background-color: var(--ust-border-color);
+  border-radius: 0;
 }
 
 .sidebar-scroll::-webkit-scrollbar-track {
